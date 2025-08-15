@@ -25,7 +25,6 @@ class _InfoScreenState extends State<InfoScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      // ถ้าเป็นหน้าสุดท้าย → ไปหน้า Register
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const RegisterScreen()),
@@ -46,7 +45,7 @@ class _InfoScreenState extends State<InfoScreen> {
       body: PageView(
         controller: _pageController,
         onPageChanged: _onPageChanged,
-        physics: const NeverScrollableScrollPhysics(), // ป้องกัน swipe
+        physics: const NeverScrollableScrollPhysics(), 
         children: _pages,
       ),
       bottomNavigationBar: BottomAppBar(

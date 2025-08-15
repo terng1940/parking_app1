@@ -2,15 +2,12 @@ import 'dart:async';
 import '../utils/mock_data.dart';
 
 class MockApiService {
-  // จำลองการเช็คข้อมูลซ้ำเหมือนเรียก API จริง
   static Future<String?> checkDuplicateUser({
     required String email,
     required String idCard,
     required String phone,
   }) async {
-    // จำลองการหน่วงเวลา API
     await Future.delayed(const Duration(seconds: 1));
-
     for (var user in MockData.users) {
       if (user["email"] == email) {
         return "อีเมลนี้มีผู้ใช้แล้ว";
@@ -22,6 +19,19 @@ class MockApiService {
         return "เบอร์โทรนี้มีผู้ใช้แล้ว";
       }
     }
-    return null; // ไม่มีข้อมูลซ้ำ
+    return null;
+  }
+
+  static Future<bool> loginUser({
+    required String email,
+    required String password,
+  }) async {
+    await Future.delayed(const Duration(seconds: 1));
+    for (var user in MockData.users) {
+      if (user["email"] == email && user["password"] == password) {
+        return true;
+      }
+    }
+    return false;
   }
 }

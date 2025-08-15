@@ -4,11 +4,13 @@ class MockData {
       "email": "test@example.com",
       "idCard": "1234567890123",
       "phone": "0801234567",
+      "password": "123456",
     },
     {
       "email": "john@example.com",
       "idCard": "9876543210987",
       "phone": "0819876543",
+      "password": "abcdef",
     }
   ];
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/storage_helper.dart';
-import 'homepage_screen.dart';
+import 'select_vehicle_screen.dart';
 
 class PinScreen extends StatefulWidget {
   const PinScreen({super.key});
@@ -30,7 +30,7 @@ class _PinScreenState extends State<PinScreen> {
   void _checkPin() {
     if (_pinController.text == _savedPin) {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => const HomepageScreen()));
+          context, MaterialPageRoute(builder: (_) => SelectVehicleScreen()));
     } else {
       setState(() {
         _errorText = 'PIN ไม่ถูกต้อง';

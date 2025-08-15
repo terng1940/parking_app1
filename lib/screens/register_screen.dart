@@ -34,7 +34,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _errorMessage = null;
     });
 
-    // จำลองเรียก API
     final duplicateMsg = await MockApiService.checkDuplicateUser(
       email: _emailController.text,
       idCard: _idCardController.text,
@@ -49,10 +48,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return;
     }
 
-    // Save PIN
     await StorageHelper.savePin(_pinController.text);
 
-    // Mock save user
     MockData.users.add({
       "email": _emailController.text,
       "idCard": _idCardController.text,
