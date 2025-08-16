@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'select_station_screen.dart';
 
 class HomepageScreen extends StatefulWidget {
   const HomepageScreen({super.key});
@@ -30,7 +31,14 @@ class _HomepageScreenState extends State<HomepageScreen> {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const SelectStationScreen(),
+                        ),
+                      );
+                    },
                     child: Text("เช็คข้อมูลสถานี"),
                   ),
                 ),
@@ -41,13 +49,16 @@ class _HomepageScreenState extends State<HomepageScreen> {
       ),
 
       bottomNavigationBar: BottomNavigationBar(
-       currentIndex: _selectedIndex,
+        currentIndex: _selectedIndex,
         onTap: (index) {
           setState(() => _selectedIndex = index);
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: "Settings",
+          ),
         ],
       ),
     );
