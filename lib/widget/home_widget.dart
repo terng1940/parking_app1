@@ -32,98 +32,93 @@ class _HomeWidgetState extends State<HomeWidget> {
     final userSurname = _userData?['surname'] ?? '';
 
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.fromLTRB(20, 60, 20, 20),
-            color: Colors.grey[100],
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
+      body: Container(
+        color: Color(0xFF0E215A),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.fromLTRB(20, 60, 20, 20),
+              color: Colors.grey[100],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'สวัสดี,',
+                        style: TextStyle(fontSize: 18, color: Colors.grey[600]),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'คุณ $userName $userSurname',
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF0E215A),
+                        ),
+                      ),
+                    ],
+                  ),
+        
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => LogoutScreen(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "โปรไฟล์ >",
+                      style: TextStyle(color: Color(0xFF0E215A), fontSize: 12),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+        
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'สวัสดี,',
-                      style: TextStyle(fontSize: 18, color: Colors.grey[600]),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'คุณ $userName $userSurname',
-                      style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF0E215A),
-                      ),
-                    ),
+                    
                   ],
                 ),
-
-                ElevatedButton(
+              ),
+            ),
+        
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => LogoutScreen(),
+                        builder: (_) => const SelectStationScreen(),
                       ),
                     );
                   },
-                  child: Text(
-                    "โปรไฟล์ >",
-                    style: TextStyle(color: Color(0xFF0E215A), fontSize: 12),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Color(0xFF0E215A),
+                    side: BorderSide(color: Color(0xFF0E215A)),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                ),
-              ],
-            ),
-          ),
-
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'ตัวเลข',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF0E215A),
-                    ),
+                  child: const Text(
+                    "เช็คข้อมูลสถานี",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 20),
-                ],
-              ),
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const SelectStationScreen(),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Color(0xFF0E215A),
-                  side: BorderSide(color: Color(0xFF0E215A)),
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                ),
-                child: const Text(
-                  "เช็คข้อมูลสถานี",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
