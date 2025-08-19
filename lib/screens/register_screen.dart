@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/storage_helper.dart';
-import '../utils/mock_data.dart';
 import '../services/mock_api_service.dart';
-import 'homepage_screen.dart';
+import 'select_vehicle_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -26,6 +25,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String? _errorMessage;
   bool _loading = false;
 
+  bool _isValidIdCard(String idCard) {
+    if (!RegExp(r'^[0-9]+$').hasMatch(idCard)) return false;
+
+    if (!_validateIdCardChecksum(idCard)) return false;
+
+    return true;
+  }
+
+  bool _validateIdCardChecksum(String id) {
+    if (id.length != 13) return false;
+
+    int sum = 0;
+    for (int i = 0; i < 12; i++) {
+      sum += int.parse(id[i]) * (13 - i);
+    }
+
+    int checkDigit = (11 - (sum % 11)) % 10;
+    return checkDigit == int.parse(id[12]);
+  }
+
   void _register() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -48,13 +67,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return;
     }
 
-    await StorageHelper.savePin(_pinController.text);
-
-    MockData.users.add({
+    final newUser = {
+      "name": _nameController.text,
+      "surname": _surnameController.text,
       "email": _emailController.text,
-      "idCard": _idCardController.text,
       "phone": _phoneController.text,
-    });
+      "idCard": _idCardController.text,
+      "password": _passwordController.text,
+      "pin": _pinController.text,
+    };
+
+    await StorageHelper.saveUserData(newUser);
 
     setState(() {
       _loading = false;
@@ -62,7 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => const HomepageScreen()),
+      MaterialPageRoute(builder: (_) => SelectVehicleScreen()),
     );
   }
 
@@ -87,46 +110,70 @@ class _RegisterScreenState extends State<RegisterScreen> {
               TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(labelText: "Name"),
-                validator: (v) => v!.isEmpty ? "กรอกชื่อ" : null,
+                validator: (v) => v!.isEmpty ? "กรุณากรอกชื่อ" : null,
               ),
               TextFormField(
                 controller: _surnameController,
                 decoration: const InputDecoration(labelText: "Surname"),
-                validator: (v) => v!.isEmpty ? "กรอกนามสกุล" : null,
+                validator: (v) => v!.isEmpty ? "กรุณากรอกนามสกุล" : null,
               ),
               TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(labelText: "Email"),
-                validator: (v) => v!.isEmpty
-                    ? "กรอกอีเมล"
-                    : (!v.contains("@") ? "อีเมลไม่ถูกต้อง" : null),
+                validator: (v) {
+                  if (v!.isEmpty) return "กรุณากรอกอีเมล";
+                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(v)) {
+                    return "รูปแบบอีเมลไม่ถูกต้อง";
+                  }
+                  return null;
+                },
               ),
               TextFormField(
                 controller: _phoneController,
-                decoration: const InputDecoration(labelText: "Phone"),
+                decoration: const InputDecoration(labelText: "Phone Number"),
                 keyboardType: TextInputType.phone,
-                validator: (v) => v!.isEmpty ? "กรอกเบอร์โทร" : null,
+                validator: (v) {
+                  if (v!.isEmpty) return "กรุณากรอกเบอร์โทร";
+                  if (!RegExp(r'^[0-9]+$').hasMatch(v)) return "ต้องเป็นตัวเลขเท่านั้น";
+                  if (v.length != 10) return "ต้องมี 10 หลัก";
+                  if (!v.startsWith('0')) return "ต้องขึ้นต้นด้วย 0";
+                  return null;
+                },
               ),
               TextFormField(
                 controller: _idCardController,
                 decoration: const InputDecoration(labelText: "ID Card"),
                 keyboardType: TextInputType.number,
-                validator: (v) => v!.isEmpty
-                    ? "กรอกบัตรประชาชน"
-                    : (v.length != 13 ? "ต้องมี 13 หลัก" : null),
+                validator: (v) {
+                  if (v!.isEmpty) return "กรุณากรอกบัตรประชาชน";
+                  if (v.length != 13) return "ต้องมี 13 หลัก";
+                  if (!RegExp(r'^[0-9]+$').hasMatch(v)) return "ต้องเป็นตัวเลขเท่านั้น";
+                  if (!_isValidIdCard(v)) return "เลขบัตรประชาชนไม่ถูกต้อง";
+                  return null;
+                },
               ),
               TextFormField(
                 controller: _passwordController,
                 decoration: const InputDecoration(labelText: "Password"),
                 obscureText: true,
-                validator: (v) => v!.isEmpty ? "กรอกรหัสผ่าน" : null,
+                validator: (v) {
+                  if (v!.isEmpty) return "กรุณากรอกรหัสผ่าน";
+                  if (v.length < 6) return "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร";
+                  return null;
+                },
               ),
               TextFormField(
                 controller: _confirmPasswordController,
-                decoration: const InputDecoration(labelText: "Confirm Password"),
+                decoration: const InputDecoration(
+                  labelText: "Confirm Password",
+                ),
                 obscureText: true,
-                validator: (v) =>
-                    v != _passwordController.text ? "รหัสผ่านไม่ตรงกัน" : null,
+                validator: (v) {
+                  if (v != _passwordController.text) {
+                    return "รหัสผ่านไม่ตรงกัน";
+                  }
+                  return null;
+                },
               ),
               TextFormField(
                 controller: _pinController,
@@ -134,7 +181,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 keyboardType: TextInputType.number,
                 obscureText: true,
                 maxLength: 4,
-                validator: (v) => v!.length != 4 ? "ต้องมี 4 หลัก" : null,
+                validator: (v) {
+                  if (v!.isEmpty) return "กรุณากรอก PIN";
+                  if (v.length != 4) return "ต้องมี 4 หลัก";
+                  if (!RegExp(r'^[0-9]+$').hasMatch(v))
+                    return "ต้องเป็นตัวเลขเท่านั้น";
+                  return null;
+                },
               ),
               const SizedBox(height: 20),
               _loading

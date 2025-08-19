@@ -1,16 +1,22 @@
 class MockData {
   static List<Map<String, String>> users = [
     {
-      "email": "test@example.com",
+      "name": "Test",
+      "surname": "User01",
+      "email": "test01@example.com",
+      "phone": "0876543219",
       "idCard": "1234567890123",
-      "phone": "0801234567",
       "password": "123456",
+      "pin": "1234"
     },
     {
-      "email": "john@example.com",
-      "idCard": "9876543210987",
-      "phone": "0819876543",
-      "password": "abcdef",
+      "name": "Test",
+      "surname": "User02",
+      "email": "test02@example.com",
+      "phone": "0987654321",
+      "idCard": "1234567890123",
+      "password": "123456",
+      "pin": "5678"
     },
   ];
 }

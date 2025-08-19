@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../services/mock_api_service.dart';
 import '../utils/storage_helper.dart';
-import 'homepage_screen.dart';
+import 'register_screen.dart';
+import 'select_vehicle_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,31 +11,41 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _loading = false;
+
   String? _errorMessage;
+  bool _loading = false;
 
   void _login() async {
-    if (!_formKey.currentState!.validate()) return;
-
     setState(() {
       _loading = true;
       _errorMessage = null;
     });
 
-    bool success = await MockApiService.loginUser(
-      email: _emailController.text,
-      password: _passwordController.text,
-    );
+    final userData = await StorageHelper.getUserData();
+    print('User Data: $userData');
 
-    if (success) {
-      // สมมติว่าตั้ง PIN ไว้คงที่ 0000 หรือมาจาก server ก็ได้
-      await StorageHelper.savePin("0000");
+    if (userData == null) {
+      setState(() {
+        _errorMessage = "ยังไม่มีผู้ใช้ กรุณาสมัครก่อน";
+        _loading = false;
+      });
+      return;
+    }
+
+    final savedEmail = userData["email"];
+    final savedPassword = userData["password"]; 
+
+    if (_emailController.text == savedEmail &&
+        _passwordController.text == savedPassword) {
+
+      await StorageHelper.saveSession(true);
+
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const HomepageScreen()),
+        MaterialPageRoute(builder: (_) => SelectVehicleScreen()),
       );
     } else {
       setState(() {
@@ -48,41 +58,44 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Login")),
+      appBar: AppBar(title: const Text("เข้าสู่ระบบ")),
       body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              if (_errorMessage != null)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Text(
-                    _errorMessage!,
-                    style: const TextStyle(color: Colors.red),
-                  ),
-                ),
-              TextFormField(
-                controller: _emailController,
-                decoration: const InputDecoration(labelText: "Email"),
-                validator: (v) => v!.isEmpty ? "กรอกอีเมล" : null,
-              ),
-              TextFormField(
-                controller: _passwordController,
-                decoration: const InputDecoration(labelText: "Password"),
-                obscureText: true,
-                validator: (v) => v!.isEmpty ? "กรอกรหัสผ่าน" : null,
-              ),
-              const SizedBox(height: 20),
-              _loading
-                  ? const CircularProgressIndicator()
-                  : ElevatedButton(
-                      onPressed: _login,
-                      child: const Text("Login"),
-                    ),
-            ],
-          ),
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _emailController,
+              decoration: const InputDecoration(labelText: "อีเมล"),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _passwordController, 
+              obscureText: true,
+              decoration: const InputDecoration(labelText: "รหัสผ่าน"),
+            ),
+            const SizedBox(height: 20),
+            if (_errorMessage != null)
+              Text(_errorMessage!, style: const TextStyle(color: Colors.red)),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _loading ? null : _login,
+              child: _loading
+                  ? const CircularProgressIndicator(color: Colors.white)
+                  : const Text("เข้าสู่ระบบ"),
+            ),
+            const SizedBox(height: 12),
+            TextButton(
+              onPressed: () {
+                // ไปหน้า Register
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const RegisterScreen()),
+                );
+              },
+              child: const Text("สมัครสมาชิก"),
+            ),
+          ],
         ),
       ),
     );
