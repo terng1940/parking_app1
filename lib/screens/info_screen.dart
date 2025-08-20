@@ -67,25 +67,24 @@ class _InfoScreenState extends State<InfoScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'ยินดีต้อนรับสู่ระบบจอดรถ',
+            'Lorem Ipsum Dolor Sit Amet',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),
           const Text(
-            'บริการจอดรถอัจฉริยะของเราออกแบบมาเพื่อให้คุณสะดวกสบายยิ่งขึ้น '
-            'ด้วยระบบจัดการจอดรถแบบดิจิทัลที่ทันสมัย คุณสามารถใช้งานได้อย่างรวดเร็วและปลอดภัย',
+            'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
             style: TextStyle(fontSize: 16, height: 1.5),
           ),
           const SizedBox(height: 25),
           const Text(
-            'วิธีการใช้งานเบื้องต้น:',
+            'Duis Aute Irure:',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 15),
-          _buildInfoRow('1. สร้าง QR Code สำหรับใช้จอดรถได้ง่ายๆ ผ่านแอปพลิเคชัน'),
-          _buildInfoRow('2. นำ QR Code ไปสแกนที่เครื่องสแกนในลานจอดรถ'),
-          _buildInfoRow('3. ระบบจะบันทึกเวลาการจอดรถของคุณโดยอัตโนมัติ'),
-          _buildInfoRow('4. ชำระเงินได้อย่างสะดวกเมื่อคุณต้องการออกจากลานจอดรถ'),
+          _buildInfoRow('1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+          _buildInfoRow('2. Sed do eiusmod tempor incididunt ut labore et dolore.'),
+          _buildInfoRow('3. Magna aliqua ut enim ad minim veniam, quis nostrud.'),
+          _buildInfoRow('4. Exercitation ullamco laboris nisi ut aliquip ex ea.'),
           const SizedBox(height: 25),
           Container(
             padding: const EdgeInsets.all(15),
@@ -94,7 +93,7 @@ class _InfoScreenState extends State<InfoScreen> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Text(
-              'เริ่มต้นใช้งานวันนี้เพื่อประสบการณ์จอดรถที่ง่ายและสะดวกสบายยิ่งขึ้น!',
+              'Commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur!',
               style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
             ),
           ),
@@ -110,41 +109,41 @@ class _InfoScreenState extends State<InfoScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'ประโยชน์ของการใช้ QR Code จอดรถ',
+            'Excepteur Sint Occaecat',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),
           _buildBenefitItem(
             Icons.qr_code,
-            'ไม่ต้องใช้ตั๋วจอดรถ',
-            'ลืมปัญหาตั๋วจอดรถหายหรือเสียหาย ด้วยระบบ QR Code ดิจิทัล'
+            'Cupidatat Non Proident',
+            'Sunt in culpa qui officia deserunt mollit anim id est laborum.'
           ),
           _buildBenefitItem(
             Icons.access_time,
-            'บันทึกเวลาอัตโนมัติ',
-            'ระบบจะคำนวณเวลาจอดรถโดยอัตโนมัติอย่างแม่นยำ'
+            'Tempor Incididunt',
+            'Ut labore et dolore magna aliqua ut enim ad minim veniam.'
           ),
           _buildBenefitItem(
             Icons.payment,
-            'ชำระเงินง่ายดาย',
-            'ชำระเงินผ่านแอปพลิเคชันได้หลายช่องทาง ไม่ต้องเตรียมเงินสด'
+            'Quis Nostrud',
+            'Exercitation ullamco laboris nisi ut aliquip ex ea commodo.'
           ),
           _buildBenefitItem(
             Icons.security,
-            'ปลอดภัยและน่าเชื่อถือ',
-            'ข้อมูลการจอดรถของคุณจะถูกเก็บรักษาอย่างปลอดภัย'
+            'Consequat Duis',
+            'Aute irure dolor in reprehenderit in voluptate velit esse.'
           ),
           const SizedBox(height: 25),
           const Text(
-            'วิธีการสร้าง QR Code:',
+            'Sed Do Eiusmod:',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 15),
           const Text(
-            '1. ไปที่หน้าสร้าง QR Code ในแอปพลิเคชัน\n'
-            '2. ระบบจะสร้างรหัสเฉพาะสำหรับคุณ\n'
-            '3. QR Code จะแสดงบนหน้าจอพร้อมข้อมูลที่จำเป็น\n'
-            '4. คุณสามารถใช้ QR Code นี้ได้ทันที',
+            '1. Tempor incididunt ut labore et dolore magna aliqua.\n'
+            '2. Ut enim ad minim veniam, quis nostrud exercitation.\n'
+            '3. Ullamco laboris nisi ut aliquip ex ea commodo.\n'
+            '4. Consequat duis aute irure dolor in reprehenderit.',
             style: TextStyle(fontSize: 16, height: 1.5),
           ),
         ],
@@ -159,41 +158,41 @@ class _InfoScreenState extends State<InfoScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'ข้อกำหนดและเงื่อนไข',
+            'Velit Esse Cillum Dolore',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),
           const Text(
-            'ก่อนเริ่มใช้งาน กรุณาอ่านและทำความเข้าใจข้อกำหนดต่อไปนี้:',
+            'Eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident:',
             style: TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 15),
           _buildTermItem(
-            'QR Code แต่ละใบมีอายุการใช้งานจำกัดตามที่กำหนด'
+            'Sunt in culpa qui officia deserunt mollit anim id est laborum.'
           ),
           _buildTermItem(
-            'ผู้ใช้ต้องรับผิดชอบในการรักษาความปลอดภัยของ QR Code'
+            'Sed ut perspiciatis unde omnis iste natus error sit voluptatem.'
           ),
           _buildTermItem(
-            'การจอดรถต้องปฏิบัติตามกฎระเบียบของลานจอดรถแต่ละแห่ง'
+            'Accusantium doloremque laudantium totam rem aperiam.'
           ),
           _buildTermItem(
-            'ค่าบริการจะถูกคำนวณตามระยะเวลาการจอดรถจริง'
+            'Eaque ipsa quae ab illo inventore veritatis et quasi architecto.'
           ),
           _buildTermItem(
-            'ในกรณีที่ QR Code ไม่ทำงาน กรุณาติดต่อเจ้าหน้าที่'
+            'Beatae vitae dicta sunt explicabo nemo enim ipsam voluptatem.'
           ),
           const SizedBox(height: 25),
           const Text(
-            'นโยบายการคำนวณค่าบริการ:',
+            'Quis Autem Vel Eum:',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 15),
           const Text(
-            '• ชั่วโมงแรก: 30 บาท\n'
-            '• ชั่วโมงต่อไป: ชั่วโมงละ 20 บาท\n'
-            '• สูงสุดต่อวัน: 250 บาท\n'
-            '• การจอดรถเกินเวลาเกินกว่าที่กำหนดอาจมีค่าปรับเพิ่ม',
+            '• Iure reprehenderit qui in ea voluptate velit: 30 BAHT\n'
+            '• Quam nihil molestiae consequatur: 20 BAHT / HOUR\n'
+            '• Vel illum qui dolorem eum fugiat quo: 250 BAHT / DAY\n'
+            '• Voluptas nulla pariatur vero eos et accusamus: + FINE',
             style: TextStyle(fontSize: 16, height: 1.5),
           ),
           const SizedBox(height: 20),
@@ -204,8 +203,7 @@ class _InfoScreenState extends State<InfoScreen> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Text(
-              'ขอบคุณที่เลือกใช้บริการของเรา หากมีคำถามหรือต้องการความช่วยเหลือ '
-              'กรุณาติดต่อศูนย์บริการลูกค้าได้ตลอด 24 ชั่วโมง',
+              'Officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus.',
               style: TextStyle(fontSize: 16),
             ),
           ),

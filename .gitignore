@@ -47,6 +47,7 @@ app.*.map.json
 # Platform specific generated files - Keep essential configs
 /android/app/build/
 /android/build/
+/ios/Flutter/
 /ios/Flutter/.last_build_id
 /ios/Flutter/App.framework/
 /ios/Flutter/Flutter.framework/
