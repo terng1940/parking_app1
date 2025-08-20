@@ -44,10 +44,18 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Ignore only generated files, keep essential configs
-/ios/Flutter/
-/ios/.symlinks/
-/ios/Pods/
-/ios/Runner/GeneratedPluginRegistrant.*
+# Platform specific generated files - Keep essential configs
 /android/app/build/
 /android/build/
+/ios/Flutter/.last_build_id
+/ios/Flutter/App.framework/
+/ios/Flutter/Flutter.framework/
+/ios/Flutter/Flutter.podspec
+/ios/Flutter/Generated.xcconfig
+/ios/Flutter/ephemeral/
+/ios/Pods/
+/ios/.symlinks/
+/ios/Runner/GeneratedPluginRegistrant.*
+/linux/flutter/generated_*
+/windows/flutter/generated_*
+/macos/Flutter/GeneratedPluginRegistrant.*
